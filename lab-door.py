@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 import RPi.GPIO as GPIO
+
 from time import sleep
 
 from flask import Flask
@@ -14,6 +15,14 @@ GPIO.setup(24, GPIO.OUT)
     # использовать пин 24 для вывода    
 
 
+@app.route("/")
+def root():
+   templateData = {
+      'title' : 'Lab Door Control',
+      }
+   return render_template('index.html', **templateData)
+   
+
 @app.route("/open")
 def openDoor():
     GPIO.output(24, True)
@@ -24,6 +33,4 @@ def openDoor():
     templateData = {
     }
     return message
-
-
 
