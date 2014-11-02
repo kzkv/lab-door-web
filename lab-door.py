@@ -2,6 +2,9 @@
 
 import RPi.GPIO as GPIO
 
+import atexit
+    # модуль для вызовов во время выключения интерпретатора
+
 from time import sleep
 
 from flask import Flask, render_template
@@ -37,3 +40,6 @@ def openDoor():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80, debug=True)
+
+atexit.register(GPIO.cleanup)
+    # клин-ап портов во время выхода
